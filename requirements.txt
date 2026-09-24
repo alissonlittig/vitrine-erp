@@ -1,0 +1,5 @@
+# Dependências do Vitrine ERP (versões testadas)
+customtkinter==6.0.0
+matplotlib==3.11.2
+openpyxl==3.1.5
+reportlab==5.0.1
