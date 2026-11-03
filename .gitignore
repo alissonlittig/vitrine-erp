@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+demo_dados/
+*.db
+*.db-*
+erros_sistema.log

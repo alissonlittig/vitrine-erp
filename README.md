@@ -22,6 +22,44 @@
 
 ## 🇧🇷 Português
 
+### Novidade: versão 2 (interface nova, estoque e várias lojas)
+
+A demo agora tem **duas gerações**: o programa original (`main.py`, CustomTkinter) e a **versão 2** em [`vitrine_v2/`](vitrine_v2), a mesma que passou a rodar na loja real. Ela foi redesenhada em torno do que uma loja pequena sente no dia a dia: fila no caixa, estoque furado e internet que cai.
+
+![Registrar venda na versão 2](docs/v2/01_venda.png)
+
+| O que mudou | Para a loja, na prática |
+|---|---|
+| **Interface nova** (pywebview), com atalhos F1–F8 e Alt+letra | Mais rápida no caixa: a venda sai em poucos toques, sem mouse. Menos treinamento para quem entra na equipe. |
+| **PDV com leitor de código de barras** e **venda híbrida** | Bipou, o produto entra na venda e o estoque baixa sozinho. Dá para continuar só digitando o valor, como antes. Ninguém é obrigado a cadastrar tudo no primeiro dia. |
+| **Estoque por filial**: entrada, contagem, ajuste, etiqueta Code 128 e consulta | O que está acabando aparece em vermelho **antes** de faltar. Cada filial vê o estoque da outra (só leitura) e pede transferência. |
+| **Várias filiais e vários computadores** ao mesmo tempo, com sincronização pela nuvem | Caixa, notebook de casa e outra loja com os mesmos números. Cada evento tem identificador único: nada duplica e nada se perde. |
+| **Venda nunca espera a rede** (SQLite local em cada PC; a nuvem só concilia) | Caiu a internet, a fila continua andando. Quando volta, as lojas se acertam sozinhas. |
+| **Atualização automática** e **backup diário** com histórico | Correções chegam sem ninguém instalar nada e o banco tem cópia datada todo dia. |
+| **Loja online ligada ao estoque** (disponível/esgotado) e **taxa de entrega por bairro** | O site não vende o que acabou, e o frete de cada pedido já sai certo. |
+| **Gestão com senha** (PBKDF2, trava após erros, bloqueio por inatividade) e auditoria de alterações | Comissão, lucro e equipe só para quem deve ver, com rastro de quem apagou ou editou. |
+
+| Estoque com alerta de mínimo | Cadastro de produto e etiqueta |
+|---|---|
+| ![Estoque](docs/v2/02_estoque.png) | ![Produtos](docs/v2/03_produtos.png) |
+
+| Fechamento de caixa | Resultado do ano (DRE) |
+|---|---|
+| ![Caixa](docs/v2/04_caixa.png) | ![DRE](docs/v2/05_dre.png) |
+
+**Rodar a versão 2 (dados fictícios):**
+
+```bash
+pip install -r vitrine_v2/requirements.txt
+python gerar_banco_demo.py centro
+python vitrine_v2/semear_demo.py --origem demo_centro.db --destino demo_dados/centro.db
+python vitrine_v2/vitrine_v2.py --banco demo_dados/centro.db     # senha da Gestão: definida na primeira abertura
+```
+
+A versão 2 funciona 100% local. A sincronização e a atualização automática só ligam se você configurar um servidor próprio (`VITRINE_PORTAO_URL` e `VITRINE_PORTAO_CHAVE`); este repositório não traz nenhum endereço ou chave. A tela de Pedidos online e a nuvem ficam inativas na demo.
+
+---
+
 ### O problema
 
 A loja controlava vendas, comissões, despesas e caixa em planilhas e cadernos, com duas filiais e equipes diferentes. Fechar o mês levava horas, a comissão era calculada à mão, e ninguém sabia o lucro real de cada mês.
@@ -117,6 +155,25 @@ vitrine-erp/
 ---
 
 ## 🇺🇸 English
+
+### New: version 2 (new interface, inventory and multi-store sync)
+
+The demo now ships **two generations**: the original program (`main.py`, CustomTkinter) and **version 2** in [`vitrine_v2/`](vitrine_v2), the one now running in the real store. It was redesigned around what a small shop feels every day: checkout queues, inaccurate stock and flaky internet.
+
+| What changed | What it means for the store |
+|---|---|
+| **New interface** (pywebview) with F1–F8 and Alt+key shortcuts | Faster checkout: a sale takes a few taps, no mouse. New staff learn it quickly. |
+| **POS with barcode scanner** and **hybrid sale** | Scan an item and stock drops by itself. You can still just type the amount like before, so nobody must catalogue everything on day one. |
+| **Per-store inventory**: receiving, counts, adjustments, Code 128 labels, lookup | Low stock turns red **before** you run out. Each store sees the other's stock (read-only) and can request a transfer. |
+| **Many stores and PCs at once**, synced through the cloud | Register, home laptop and second store show the same numbers. Every event has a unique id: nothing duplicates, nothing is lost. |
+| **A sale never waits for the network** (local SQLite on each PC; the cloud only reconciles) | Internet down, the line keeps moving. When it is back, stores catch up on their own. |
+| **Automatic updates** and **daily backup** | Fixes arrive with no one installing anything, and the database has a dated copy every day. |
+| **Online store tied to inventory** (in stock / sold out) and **delivery fee by neighborhood** | The website stops selling what is gone, and every order gets the right shipping. |
+| **Password-protected management** (PBKDF2, lockout, idle lock) and an audit trail | Commissions, profit and staff are visible only to the right people, with a record of who edited or deleted. |
+
+Screenshots above (Portuguese section) use fictional data only. **Run v2:** see the commands in the Portuguese section; it works fully offline. Sync and auto-update only turn on if you point it to your own server (`VITRINE_PORTAO_URL`, `VITRINE_PORTAO_CHAVE`); this repo contains no endpoint or key.
+
+---
 
 ### The problem
 

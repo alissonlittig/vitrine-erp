@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vitrine</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="faixa-loja" id="faixa-loja" role="banner" aria-live="polite">
+  <svg class="ic"><use href="#i-loja"/></svg>
+  <strong id="faixa-nome">Vitrine</strong>
+  <span id="faixa-end"></span>
+</header>
+
+<!-- Ícones (SVG simples, traço 2px). Uso: <svg class="ic"><use href="#i-..."/></svg> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-loja" viewBox="0 0 24 24"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9a2.67 2.67 0 0 0 5.33 0 2.67 2.67 0 0 0 5.34 0A2.67 2.67 0 0 0 20 9"/><path d="M5 12v8h14v-8M10 20v-5h4v5"/></symbol>
+  <symbol id="i-casa" viewBox="0 0 24 24"><path d="M3 11l9-7.5 9 7.5"/><path d="M5.5 9.5V20h13V9.5M10 20v-6h4v6"/></symbol>
+  <symbol id="i-venda" viewBox="0 0 24 24"><path d="M3 4h2l2.4 10.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></symbol>
+  <symbol id="i-lista" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01" stroke-width="3"/></symbol>
+  <symbol id="i-caixa" viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="10" rx="2"/><path d="M7 10V5h10v5M3 15h18M11 7.5h2"/></symbol>
+  <symbol id="i-despesa" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+  <symbol id="i-cadeado" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-cadeado-aberto" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 7.6-1.7"/></symbol>
+  <symbol id="i-dinheiro" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9.5v5M18 9.5v5"/></symbol>
+  <symbol id="i-pix" viewBox="0 0 24 24"><path d="M12 3l9 9-9 9-9-9z"/><path d="M8.5 12h7"/></symbol>
+  <symbol id="i-cartao" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></symbol>
+  <symbol id="i-parcela" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M14 15h2M18 15h0"/><path d="M6 15h4" /></symbol>
+  <symbol id="i-receber" viewBox="0 0 24 24"><path d="M12 3v11M7 9l5 5 5-5"/><path d="M4 18v2h16v-2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 10"/></symbol>
+  <symbol id="i-calendario" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-editar" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></symbol>
+  <symbol id="i-lixo" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></symbol>
+  <symbol id="i-esq" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></symbol>
+  <symbol id="i-dir" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="i-alerta" viewBox="0 0 24 24"><path d="M12 3.5l9.5 16.5h-19z"/><path d="M12 10v4.5M12 17.5v.01"/></symbol>
+  <symbol id="i-grafico" viewBox="0 0 24 24"><path d="M3 20h18M6 16v-5M11 16V6M16 16v-8"/></symbol>
+  <symbol id="i-trofeu" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 21h8M10 17h4v4h-4z"/></symbol>
+  <symbol id="i-presente" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="5" rx="1"/><path d="M5 13v8h14v-8M12 8v13"/><path d="M12 8C9.5 8 7.5 4.5 9.5 4S12 8 12 8s.5-4.5 2.5-4S14.5 8 12 8"/></symbol>
+  <symbol id="i-equipe" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5a6.5 6.5 0 0 1 3.5 5.5"/></symbol>
+  <symbol id="i-dre" viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M7 15l4-4 3 3 5-6"/></symbol>
+  <symbol id="i-voltar" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-excel" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-mais" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-menos" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-salvar" viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v5h7V3M8 21v-7h8v7"/></symbol>
+  <symbol id="i-caixote" viewBox="0 0 24 24"><path d="M3 8l9-5 9 5v10l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v10"/></symbol>
+  <symbol id="i-abrir" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v6H4V6h6"/></symbol>
+</svg>
+
+<aside class="nav" aria-label="Menu">
+  <div class="marca"><strong>Vitrine</strong><span>Cosméticos</span></div>
+  <button class="nav-item" data-tela="venda" style="--item-cor: var(--verde)"><svg class="ic"><use href="#i-venda"/></svg><span>Registrar <u>v</u>enda</span><kbd class="kbd kbd-mini">Alt+V</kbd></button>
+  <button class="nav-item" data-tela="historico" style="--item-cor: var(--azul)"><svg class="ic"><use href="#i-lista"/></svg><span><u>H</u>istórico</span><kbd class="kbd kbd-mini">Alt+H</kbd></button>
+  <button class="nav-item" data-tela="caixa" style="--item-cor: var(--ambar)"><svg class="ic"><use href="#i-caixa"/></svg><span>Fechamento de <u>c</u>aixa</span><kbd class="kbd kbd-mini">Alt+C</kbd></button>
+  <button class="nav-item" data-tela="despesas" style="--item-cor: var(--violeta)"><svg class="ic"><use href="#i-despesa"/></svg><span><u>D</u>espesas</span><kbd class="kbd kbd-mini">Alt+D</kbd></button>
+  <button class="nav-item" data-tela="estoque" style="--item-cor: var(--azul)"><svg class="ic"><use href="#i-caixote"/></svg><span><u>E</u>stoque</span><kbd class="kbd kbd-mini">Alt+E</kbd></button>
+  <button class="nav-item" data-tela="pedidos" id="nav-pedidos" style="--item-cor: var(--violeta)"><svg class="ic"><use href="#i-presente"/></svg><span><u>P</u>edidos online</span><b class="selo-pedidos oculto" id="pedidos-selo">0</b></button>
+  <button class="nav-item" data-tela="gestao" style="--item-cor: var(--ardosia)"><svg class="ic"><use href="#i-grafico"/></svg><span><u>G</u>estão</span><svg class="ic cadeado"><use id="nav-cadeado" href="#i-cadeado"/></svg></button>
+  <button class="nav-item nav-trocar" id="nav-trocar" style="--item-cor: var(--ardosia)"><svg class="ic"><use href="#i-casa"/></svg><span>Trocar de loja</span></button>
+  <div class="nav-rodape">
+    Banco local com backup diário.<br>
+    <span id="computador"></span><br>
+    <span id="versao-app"></span><br>
+    <span id="sync-estado" title="Última sincronização com a nuvem"></span>
+    <div id="atu-aviso" class="atu-aviso oculto">
+      <strong>Atualização pronta</strong> <span id="atu-nova"></span>
+      <button class="btn btn-p" id="atu-botao">Atualizar agora</button>
+    </div>
+  </div>
+</aside>
+
+<main>
+  <!-- ===================== REGISTRAR VENDA ===================== -->
+  <section class="tela" id="tela-venda" style="--cor-area: var(--verde); --cor-area-clara: var(--verde-claro)">
+    <div class="cabecalho">
+      <h1><span class="bolinha"><svg class="ic"><use href="#i-venda"/></svg></span>Registrar venda</h1>
+    </div>
+    <div class="venda-grid">
+      <div class="cartao venda-form">
+        <div>
+          <p class="rotulo"><span class="passo">1</span>Vendedora <span class="dica dica-normal">Ctrl+1…9</span></p>
+          <div class="fichas" id="v-fichas" role="radiogroup" aria-label="Vendedora"></div>
+        </div>
+        <div class="linha-2col">
+          <div>
+            <p class="rotulo"><span class="passo">2</span>Produto <span class="kbd">F8</span></p>
+            <div class="segmentado" id="v-produto" role="radiogroup" aria-label="Produto"></div>
+          </div>
+          <div>
+            <p class="rotulo">Data da venda</p>
+            <div class="navdata">
+              <input id="v-data" class="num" aria-label="Data da venda" autocomplete="off">
+              <button class="btn" id="v-data-hoje">Hoje</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="rotulo"><span class="passo">3</span>Forma de pagamento</p>
+          <div class="pagamentos" id="v-pagamentos" role="radiogroup" aria-label="Forma de pagamento"></div>
+        </div>
+        <div id="v-cesta" class="oculto">
+          <p class="rotulo">Produtos bipados <span class="dica dica-normal">(baixam o estoque ao salvar)</span></p>
+          <div class="cartao-tabela"><div class="rolagem" id="v-cesta-lista" style="max-height:120px"></div></div>
+        </div>
+        <div class="linha-valor">
+          <div>
+            <p class="rotulo"><span class="passo">4</span>Valor total <span class="dica dica-normal">· bipe o produto aqui ou digite o valor</span></p>
+            <label class="campo-valor" id="v-caixa-valor">
+              <span class="prefixo">R$</span>
+              <input id="v-valor" inputmode="decimal" autocomplete="off" placeholder="0,00" aria-label="Valor da venda ou código de barras">
+            </label>
+            <div class="valor-status" id="v-valor-status">Ex.: 42,50 ou 1.500</div>
+          </div>
+          <button class="btn btn-confirmar btn-grande" id="v-salvar"><svg class="ic"><use href="#i-check"/></svg>SALVAR VENDA <span class="kbd kbd-claro">Enter</span></button>
+        </div>
+        <div class="feedback" id="v-feedback" aria-live="polite"></div>
+      </div>
+
+      <div class="painel">
+        <div class="cartao">
+          <div class="total-dia"><span class="rotulo" style="margin:0">Vendas de hoje</span><strong class="num" id="v-total-hoje">R$ 0,00</strong></div>
+          <div class="dica" id="v-qtd-hoje">0 lançamentos</div>
+          <ul class="lista-vendas" id="v-lista-hoje"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ESTOQUE ===================== -->
+  <section class="tela oculto" id="tela-estoque" style="--cor-area: var(--azul); --cor-area-clara: var(--azul-claro)">
+    <div class="cabecalho">
+      <h1><span class="bolinha"><svg class="ic"><use href="#i-caixote"/></svg></span>Estoque</h1>
+      <div class="abas" data-grupo="estoque">
+        <button data-aba="consulta" aria-selected="true">Consulta</button>
+        <button data-aba="lancar">Entrada / contagem</button>
+        <button data-aba="produtos">Produtos e etiquetas</button>
+        <button data-aba="transf">Transferências</button>
+      </div>
+    </div>
+
+    <div class="painel-aba" data-grupo="estoque" data-aba="consulta">
+      <div class="filtros">
+        <label class="campo-inline" style="flex:1">Bipe ou digite <input id="e-busca" autocomplete="off" placeholder="Bipe o código ou digite parte do nome" style="flex:1" aria-label="Código de barras ou nome"></label>
+        <label class="campo-inline"><input type="checkbox" id="e-so-alerta"> só abaixo do mínimo</label>
+        <span class="dica" id="e-contagem"></span>
+        <span class="exportar" data-exportar="estoque"></span>
+      </div>
+      <div class="feedback" id="e-feedback"></div>
+      <div class="cartao cartao-tabela"><div class="rolagem" id="e-tabela"></div></div>
+    </div>
+
+    <div class="painel-aba oculto" data-grupo="estoque" data-aba="lancar">
+      <div class="cartao">
+        <div class="filtros" style="margin:0 0 10px">
+          <div class="segmentado" id="el-tipo" role="radiogroup" aria-label="Tipo de lançamento">
+            <button role="radio" data-valor="entrada" aria-checked="true">Entrada (chegou mercadoria)</button>
+            <button role="radio" data-valor="contagem">Contagem (quanto tem na prateleira)</button>
+            <button role="radio" data-valor="ajuste">Ajuste (perda, quebra)</button>
+          </div>
+        </div>
+        <label class="campo">Bipe cada produto (bipar de novo soma 1)<input id="el-scan" autocomplete="off" placeholder="Bipe aqui" aria-label="Código de barras"></label>
+        <label class="campo oculto" id="el-obs-campo">Motivo do ajuste<input id="el-obs" autocomplete="off" placeholder="Ex.: quebrou no transporte"></label>
+        <div class="cartao-tabela"><div class="rolagem" id="el-lista" style="max-height:290px"></div></div>
+        <div class="feedback" id="el-feedback"></div>
+        <button class="btn btn-confirmar btn-largo" id="el-gravar"><svg class="ic"><use href="#i-salvar"/></svg>GRAVAR NO ESTOQUE</button>
+      </div>
+    </div>
+
+    <div class="painel-aba oculto" data-grupo="estoque" data-aba="produtos">
+      <div class="cartao">
+        <p class="rotulo">Cadastrar produto novo</p>
+        <div class="linha-3col" style="grid-template-columns: 1.2fr 2fr 1fr 1fr">
+          <label class="campo">Código de barras <span class="dica dica-normal">(bipe; vazio = gera VT-…)</span><input id="ep-codigo" autocomplete="off"></label>
+          <label class="campo">Nome<input id="ep-nome" autocomplete="off"></label>
+          <label class="campo">Categoria<select id="ep-categoria"></select></label>
+          <label class="campo">Preço (R$)<input id="ep-preco" class="num campo-dinheiro" placeholder="0,00" autocomplete="off"></label>
+        </div>
+        <div class="feedback" id="ep-feedback"></div>
+        <button class="btn btn-confirmar" id="ep-salvar"><svg class="ic"><use href="#i-mais"/></svg>Cadastrar produto</button>
+      </div>
+      <div class="filtros" style="margin-top:14px">
+        <label class="campo-inline" style="flex:1">Buscar <input id="ep-busca" autocomplete="off" style="flex:1" placeholder="Código ou nome"></label>
+      </div>
+      <div class="cartao cartao-tabela"><div class="rolagem" id="ep-tabela"></div></div>
+    </div>
+
+    <div class="painel-aba oculto" data-grupo="estoque" data-aba="transf">
+      <div class="cartao">
+        <p class="rotulo">Pedir produto à outra loja</p>
+        <div class="filtros" style="margin:0">
+          <label class="campo-inline" style="flex:1">Bipe o produto <input id="et-scan" autocomplete="off" style="flex:1" aria-label="Código de barras"></label>
+          <label class="campo-inline">Quantidade <input id="et-qtd" class="num" value="1" style="width:80px"></label>
+          <button class="btn btn-confirmar" id="et-pedir">Pedir</button>
+        </div>
+        <div class="feedback" id="et-feedback"></div>
+      </div>
+      <div class="cartao cartao-tabela" style="margin-top:14px"><div class="rolagem" id="et-tabela"></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== PEDIDOS ONLINE ===================== -->
+  <section class="tela oculto" id="tela-pedidos" style="--cor-area: var(--violeta); --cor-area-clara: var(--violeta-claro)">
+    <div class="cabecalho">
+      <h1><span class="bolinha"><svg class="ic"><use href="#i-presente"/></svg></span>Pedidos online</h1>
+      <div class="direita"><button class="btn btn-p" id="po-bairros">🛵 Bairros de entrega</button> <button class="btn btn-p" id="po-som" aria-pressed="true">🔔 Som ligado</button></div>
+    </div>
+    <div class="filtros"><div class="segmentado" id="po-grupos" role="radiogroup" aria-label="Situação dos pedidos"></div></div>
+    <div class="feedback" id="po-feedback"></div>
+    <div class="cartao cartao-tabela"><div class="rolagem" id="po-tabela"></div></div>
+  </section>
+
+  <!-- ===================== HISTÓRICO ===================== -->
+  <section class="tela oculto" id="tela-historico" style="--cor-area: var(--azul); --cor-area-clara: var(--azul-claro)">
+    <div class="cabecalho">
+      <h1><span class="bolinha"><svg class="ic"><use href="#i-lista"/></svg></span>Histórico de vendas</h1>
+      <div class="direita exportar" data-exportar="historico"></div>
+    </div>
+    <div class="filtros">
+      <label class="campo-inline">Vendedor <select id="h-vendedor"></select></label>
+      <div class="segmentado" id="h-ordem" role="radiogroup" aria-label="Ordem">
+        <button role="radio" data-valor="Mais Recentes" aria-checked="true">Mais recentes</button>
+        <button role="radio" data-valor="Mais Antigas">Mais antigas</button>
+      </div>
+      <div class="navdata" id="h-navdata">
+        <button class="btn btn-p" data-nav="-1" aria-label="Dia anterior"><svg class="ic"><use href="#i-esq"/></svg></button>
+        <input id="h-data" class="num" placeholder="Todas as datas" aria-label="Data específica">
+        <button class="btn btn-p" data-nav="1" aria-label="Próximo dia"><svg class="ic"><use href="#i-dir"/></svg></button>
+        <button class="btn btn-p" data-nav="hoje">Hoje</button>
+        <button class="btn btn-p" data-nav="todas">Todas</button>
+      </div>
+      <span class="dica" id="h-contagem"></span>
+    </div>
+    <div class="feedback" id="h-feedback"></div>
+    <div class="cartao cartao-tabela"><div class="rolagem" id="h-tabela"></div></div>
+  </section>
+
+  <!-- ===================== FECHAMENTO DE CAIXA ===================== -->
+  <section class="tela oculto" id="tela-caixa" style="--cor-area: var(--ambar); --cor-area-clara: var(--ambar-claro)">
+    <div class="cabecalho">
+      <h1><span class="bolinha"><svg class="ic"><use href="#i-caixa"/></svg></span>Fechamento de caixa</h1>
+      <div class="abas" data-grupo="caixa">
+        <button data-aba="dia" aria-selected="true">Fechamento do dia</button>
+        <button data-aba="historico">Histórico de fechamentos</button>
+        <button data-aba="relatorio">Relatório diário</button>
+      </div>
+    </div>
+
+    <div class="painel-aba" data-grupo="caixa" data-aba="dia">
+      <div class="filtros">
+        <div class="navdata" id="c-navdata">
+          <button class="btn btn-p" data-nav="-1" aria-label="Dia anterior"><svg class="ic"><use href="#i-esq"/></svg></button>
+          <input id="c-data" class="num" aria-label="Data do fechamento">
+          <button class="btn btn-p" data-nav="1" aria-label="Próximo dia"><svg class="ic"><use href="#i-dir"/></svg></button>
+          <button class="btn btn-p" data-nav="hoje">Hoje</button>
+        </div>
+        <span class="status" id="c-status"></span>
+        <div class="direita exportar" data-exportar="fechamento"></div>
+      </div>
+      <div class="grade-caixa">
+        <div class="cartao">
+          <p class="rotulo">Gaveta</p>
+          <label class="campo-inline">Troco inicial <input id="c-troco" class="num campo-dinheiro" placeholder="0,00"></label>
+          <p class="rotulo" style="margin-top:16px">Sangria ou suprimento</p>
+          <div class="linha-mov">
+            <input id="c-mov-valor" class="num campo-dinheiro" placeholder="Valor (R$)" aria-label="Valor da sangria ou suprimento">
+            <input id="c-mov-motivo" placeholder="Motivo (ex.: comprar pão)" aria-label="Motivo">
+          </div>
+          <div class="linha-botoes">
+            <button class="btn btn-azul" id="c-suprimento"><svg class="ic"><use href="#i-mais"/></svg>Suprimento</button>
+            <button class="btn btn-sangria" id="c-sangria"><svg class="ic"><use href="#i-menos"/></svg>Sangria</button>
+          </div>
+          <div class="rolagem rolagem-baixa" id="c-movimentos"></div>
+        </div>
+        <div class="cartao">
+          <p class="rotulo">Conferência do dinheiro</p>
+          <ul class="conta num" id="c-conta"></ul>
+          <div class="online-dia oculto" id="c-online" aria-live="polite"></div>
+          <label class="campo-contado">Contado na gaveta <input id="c-contado" class="num" placeholder="0,00"></label>
+          <div class="diferenca"><span>Diferença</span><strong id="c-diferenca">—</strong></div>
+          <label class="campo">Observação <input id="c-obs" placeholder="Ex.: faltou R$ 2,00 de troco"></label>
+          <div class="feedback" id="c-feedback"></div>
+          <button class="btn btn-confirmar btn-largo" id="c-salvar"><svg class="ic"><use href="#i-salvar"/></svg>SALVAR FECHAMENTO</button>
+        </div>
+      </div>
+      <div class="grade-2 graficos">
+        <div class="cartao grafico" id="c-graf-horas"></div>
+        <div class="cartao grafico" id="c-graf-ranking"></div>
+      </div>
+    </div>
+
+    <div class="painel-aba oculto" data-grupo="caixa" data-aba="historico">
+      <div class="filtros">
+        <label class="campo-inline">Mês <select id="hf-mes"></select></label>
+        <label class="campo-inline">Ano <select id="hf-ano"></select></label>
+        <span class="dica" id="hf-resumo"></span>
+        <div class="direita exportar" data-exportar="hist_fechamentos"></div>
+      </div>
+      <p class="dica">Clique em "Abrir" (ou dê dois cliques na linha) para abrir o fechamento daquele dia.</p>
+      <div class="cartao cartao-tabela"><div class="rolagem" id="hf-tabela"></div></div>
+    </div>
+
+    <div class="painel-aba oculto" data-grupo="caixa" data-aba="relatorio">
+      <div class="filtros">
+        <div class="navdata" id="r-navdata">
+          <button class="btn btn-p" data-nav="-1" aria-label="Dia anterior"><svg class="ic"><use href="#i-esq"/></svg></button>
+          <input id="r-data" class="num" aria-label="Data do relatório">
+          <button class="btn btn-p" data-nav="1" aria-label="Próximo dia"><svg class="ic"><use href="#i-dir"/></svg></button>
+          <button class="btn btn-p" data-nav="hoje">Hoje</button>
+        </div>
+        <label class="campo-inline">Produto <select id="r-produto"></select></label>
+        <label class="campo-inline">Pagamento <select id="r-pagamento"></select></label>
+        <div class="direita exportar" data-exportar="relatorio"></div>
+      </div>
+      <div class="feedback" id="r-feedback"></div>
+      <div class="grade-2">
+        <div class="cartao cartao-resumo verde"><h3>VENDA DIÁRIA (Faturado)</h3><div class="dica" id="r-data-venda"></div><ul class="conta num" id="r-venda"></ul></div>
+        <div class="cartao cartao-resumo azul"><h3>RECEBIMENTO DIÁRIO (Caixa)</h3><div class="dica" id="r-data-rec"></div><ul class="conta num" id="r-recebido"></ul></div>
+      </div>
+      <div class="grade-2 graficos">
+        <div class="cartao grafico" id="r-graf-horas"></div>
+        <div class="cartao grafico" id="r-graf-ranking"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DESPESAS ===================== -->
+  <section class="tela oculto" id="tela-despesas" style="--cor-area: var(--violeta); --cor-area-clara: var(--violeta-claro)">
+    <div class="cabecalho">
+      <h1><span class="bolinha"><svg class="ic"><use href="#i-despesa"/></svg></span>Despesas</h1>
+      <div class="abas" data-grupo="despesas">
+        <button data-aba="registrar" aria-selected="true">Registrar despesa</button>
+        <button data-aba="historico">Histórico de despesas</button>
+        <button data-aba="graficos">Gráficos</button>
+      </div>
+    </div>
+
+    <div class="painel-aba" data-grupo="despesas" data-aba="registrar">
+      <div class="grade-despesa">
+        <div class="cartao">
+          <label class="campo">Descrição detalhada <input id="d-desc" placeholder="Ex.: conta de luz" autocomplete="off"></label>
+          <div class="linha-3col">
+            <label class="campo">Valor total (R$) <input id="d-valor" class="num campo-dinheiro" placeholder="0,00" autocomplete="off"></label>
+            <div class="campo"><span>Parcelas <span class="dica dica-normal">(1 = à vista)</span></span>
+              <div class="passo-num"><button type="button" id="d-parc-menos" aria-label="Menos uma parcela">−</button><input id="d-parcelas" class="num" value="1" aria-label="Parcelas"><button type="button" id="d-parc-mais" aria-label="Mais uma parcela">+</button></div>
+            </div>
+            <label class="campo">Data inicial <input id="d-data" class="num" autocomplete="off"></label>
+          </div>
+          <div class="campo"><span>Tipo de despesa <b id="d-tipo-escolhido"></b></span><div class="fichas fichas-p" id="d-tipos" role="radiogroup" aria-label="Tipo de despesa"></div></div>
+          <div class="feedback" id="d-feedback"></div>
+          <button class="btn btn-confirmar btn-largo" id="d-salvar"><svg class="ic"><use href="#i-salvar"/></svg>SALVAR DESPESA</button>
+        </div>
+        <div class="cartao">
+          <p class="rotulo">Últimas despesas lançadas</p>
+          <ul class="conta" id="d-ultimas"></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="painel-aba oculto" data-grupo="despesas" data-aba="historico">
+      <div class="filtros">
+        <div class="navdata" id="dh-navdata">
+          <button class="btn btn-p" data-nav="-1" aria-label="Dia anterior"><svg class="ic"><use href="#i-esq"/></svg></button>
+          <input id="dh-data" class="num" placeholder="Todas as datas" aria-label="Data específica">
+          <button class="btn btn-p" data-nav="1" aria-label="Próximo dia"><svg class="ic"><use href="#i-dir"/></svg></button>
+          <button class="btn btn-p" data-nav="hoje">Hoje</button>
+          <button class="btn btn-p" data-nav="todas">Todas</button>
+        </div>
+        <span class="dica" id="dh-contagem"></span>
+        <div class="direita exportar" data-exportar="hist_despesas"></div>
+      </div>
+      <div class="feedback" id="dh-feedback"></div>
+      <div class="cartao cartao-tabela"><div class="rolagem" id="dh-tabela"></div></div>
+    </div>
+
+    <div class="painel-aba oculto" data-grupo="despesas" data-aba="graficos">
+      <div class="filtros">
+        <label class="campo-inline">Ano <select id="dg-ano"></select></label>
+        <button class="btn btn-p" id="dg-todos">Marcar todos</button>
+        <button class="btn btn-p" id="dg-nenhum">Desmarcar todos</button>
+        <div class="direita exportar" data-exportar="graf_despesas"></div>
+      </div>
+      <div class="fichas fichas-p" id="dg-tipos"></div>
+      <div class="cartao cartao-tabela" style="margin-top:12px"><div class="rolagem rolagem-media" id="dg-tabela"></div></div>
+      <div class="cartao grafico" id="dg-grafico" style="margin-top:12px"></div>
+    </div>
+  </section>
+
+  <!-- ===================== GESTÃO ===================== -->
+  <section class="tela oculto" id="tela-gestao" style="--cor-area: var(--ardosia); --cor-area-clara: var(--ardosia-claro)">
+    <div class="cabecalho">
+      <h1><span class="bolinha"><svg class="ic"><use href="#i-grafico"/></svg></span>Área de gestão</h1>
+      <div class="direita"><button class="btn" id="g-bloquear"><svg class="ic"><use href="#i-cadeado"/></svg>Bloquear área de gestão</button></div>
+    </div>
+    <div class="cartao senha oculto" id="g-senha">
+      <h2><svg class="ic"><use href="#i-cadeado"/></svg>Área de gestão</h2>
+      <p>Digite a senha para continuar.</p>
+      <input id="g-senha-campo" type="password" autocomplete="off" aria-label="Senha">
+      <div class="feedback" id="g-senha-erro"></div>
+      <button class="btn btn-confirmar btn-largo" id="g-entrar">ENTRAR</button>
+    </div>
+    <div class="cartoes-gestao oculto" id="g-hub"></div>
+  </section>
+
+  <!-- Dashboard -->
+  <section class="tela oculto protegida" id="tela-dashboard" style="--cor-area: var(--azul); --cor-area-clara: var(--azul-claro)">
+    <button class="voltar" data-voltar><svg class="ic"><use href="#i-voltar"/></svg>Voltar para a área de gestão</button>
+    <div class="cabecalho">
+      <h1><span class="bolinha"><svg class="ic"><use href="#i-grafico"/></svg></span>Painel de vendas</h1>
+      <div class="direita exportar" data-exportar="dashboard" data-rotulo="aba atual"></div>
+    </div>
+    <div class="filtros">
+      <label class="campo-inline">Ano <select id="db-ano"></select></label>
+      <span class="rotulo" style="margin:0">Equipe</span>
+      <button class="btn btn-p" id="db-todos">Marcar todos</button>
+      <button class="btn btn-p" id="db-ativos">Somente ativos</button>
+    </div>
+    <div class="fichas fichas-p" id="db-equipe"></div>
+    <div class="abas abas-largas" data-grupo="dashboard" id="db-abas"></div>
+    <div class="cartao cartao-tabela"><div class="rolagem rolagem-media" id="db-tabela"></div></div>
+    <div class="cartao grafico" id="db-grafico" style="margin-top:12px"></div>
+  </section>
+
+  <!-- Desafios -->
+  <section class="tela oculto protegida" id="tela-desafios" style="--cor-area: var(--ambar); --cor-area-clara: var(--ambar-claro)">
+    <button class="voltar" data-voltar><svg class="ic"><use href="#i-voltar"/></svg>Voltar para a área de gestão</button>
+    <div class="cabecalho">
+      <h1><span class="bolinha"><svg class="ic"><use href="#i-trofeu"/></svg></span>Desafios</h1>
+      <div class="abas" data-grupo="desafios">
+        <button data-aba="lancar" aria-selected="true">Lançar desafio do dia</button>
+        <button data-aba="mensal">Conclusão mensal</button>
+        <button data-aba="participantes">Participantes</button>
+      </div>
+    </div>
+    <div class="painel-aba" data-grupo="desafios" data-aba="lancar">
+      <div class="cartao">
+        <p class="rotulo"><span class="passo">1</span>Produto do desafio</p>
+        <div class="filtros" style="margin:0">
+          <div class="navdata" id="ds-navdata">
+            <button class="btn btn-p" data-nav="-1" aria-label="Dia anterior"><svg class="ic"><use href="#i-esq"/></svg></button>
+            <input id="ds-data" class="num" aria-label="Data do desafio">
+            <button class="btn btn-p" data-nav="1" aria-label="Próximo dia"><svg class="ic"><use href="#i-dir"/></svg></button>
+            <button class="btn btn-p" data-nav="hoje">Hoje</button>
+          </div>
+          <label class="campo-inline" style="flex:1">Produto <input id="ds-produto" placeholder="Ex.: CREME HASKELL" style="flex:1"></label>
+          <span class="dica" id="ds-meta"></span>
+        </div>
+        <div class="linha-botoes" style="justify-content:flex-end; margin-top:12px">
+          <span class="feedback" id="ds-feedback" style="margin-right:auto"></span>
+          <button class="btn btn-perigo-leve" id="ds-excluir"><svg class="ic"><use href="#i-lixo"/></svg>Excluir desafio</button>
+          <button class="btn btn-azul" id="ds-salvar"><svg class="ic"><use href="#i-salvar"/></svg>SALVAR PRODUTO</button>
+        </div>
+      </div>
+      <div class="cartao" style="margin-top:14px">
+        <p class="rotulo"><span class="passo">2</span><span id="ds-titulo-res">Quantidade vendida por vendedora</span></p>
+        <div id="ds-grade"></div>
+      </div>
+    </div>
+    <div class="painel-aba oculto" data-grupo="desafios" data-aba="mensal">
+      <div class="filtros">
+        <label class="campo-inline">Mês <select id="dm-mes"></select></label>
+        <label class="campo-inline">Ano <select id="dm-ano"></select></label>
+        <div class="direita" id="dm-exportar"></div>
+      </div>
+      <div class="kpis" id="dm-kpis"></div>
+      <div class="cartao cartao-tabela"><div class="rolagem rolagem-baixa" id="dm-resumo"></div></div>
+      <p class="rotulo" style="margin-top:14px">Detalhe por dia</p>
+      <div class="cartao cartao-tabela"><div class="rolagem rolagem-baixa" id="dm-por-dia"></div></div>
+    </div>
+    <div class="painel-aba oculto" data-grupo="desafios" data-aba="participantes">
+      <p class="dica">Marque quem participa dos desafios. Para incluir uma recém-contratada, cadastre primeiro na tela Equipe e depois marque aqui.<br>Retirar alguém não apaga nada: o que já foi lançado para ela continua valendo.</p>
+      <div class="feedback" id="dp-feedback"></div>
+      <div class="cartao" id="dp-lista"></div>
+    </div>
+  </section>
+
+  <!-- Bonificações -->
+  <section class="tela oculto protegida" id="tela-bonificacoes" style="--cor-area: var(--violeta); --cor-area-clara: var(--violeta-claro)">
+    <button class="voltar" data-voltar><svg class="ic"><use href="#i-voltar"/></svg>Voltar para a área de gestão</button>
+    <div class="cabecalho">
+      <h1><span class="bolinha"><svg class="ic"><use href="#i-presente"/></svg></span>Bonificações</h1>
+    </div>
+    <div class="cartao">
+      <p class="rotulo">Lançar bonificação</p>
+      <div class="filtros" style="margin:0">
+        <label class="campo-inline">Vendedora <select id="b-vendedora"></select></label>
+        <label class="campo-inline">Mês de referência <select id="b-mes"></select></label>
+        <select id="b-ano" aria-label="Ano de referência"></select>
+        <label class="campo-inline">Valor (R$) <input id="b-valor" class="num campo-dinheiro" placeholder="0,00"></label>
+      </div>
+      <div class="filtros" style="margin:10px 0 0">
+        <label class="campo-inline" style="flex:1">Motivo <input id="b-motivo" placeholder="Ex.: meta de perfumaria batida" style="flex:1"></label>
+        <button class="btn btn-confirmar" id="b-salvar"><svg class="ic"><use href="#i-salvar"/></svg>SALVAR BONIFICAÇÃO</button>
+      </div>
+      <div class="feedback" id="b-feedback"></div>
+      <p class="dica" id="b-nota"></p>
+    </div>
+    <div class="filtros" style="margin-top:14px">
+      <span class="rotulo" style="margin:0">Ver lançamentos de</span>
+      <select id="bf-mes" aria-label="Mês"></select>
+      <select id="bf-ano" aria-label="Ano"></select>
+      <strong class="total-verde" id="bf-resumo"></strong>
+      <div class="direita exportar" data-exportar="bonificacoes"></div>
+    </div>
+    <div class="cartao cartao-tabela"><div class="rolagem rolagem-media" id="b-tabela"></div></div>
+  </section>
+
+  <!-- Equipe -->
+  <section class="tela oculto protegida" id="tela-equipe" style="--cor-area: var(--ardosia); --cor-area-clara: var(--ardosia-claro)">
+    <button class="voltar" data-voltar><svg class="ic"><use href="#i-voltar"/></svg>Voltar para a área de gestão</button>
+    <div class="cabecalho">
+      <h1><span class="bolinha"><svg class="ic"><use href="#i-equipe"/></svg></span>Equipe</h1>
+    </div>
+    <div class="cartao">
+      <div class="filtros" style="margin:0">
+        <label class="campo-inline" style="flex:1">Nome do novo vendedor <input id="e-nome" autocomplete="off" style="flex:1"></label>
+        <button class="btn btn-confirmar" id="e-adicionar"><svg class="ic"><use href="#i-mais"/></svg>Adicionar</button>
+      </div>
+      <div class="feedback" id="e-feedback"></div>
+    </div>
+    <div class="cartao cartao-tabela" style="margin-top:14px"><div class="rolagem" id="e-tabela"></div></div>
+  </section>
+
+  <!-- Histórico de alterações -->
+  <section class="tela oculto protegida" id="tela-auditoria" style="--cor-area: var(--ardosia); --cor-area-clara: var(--ardosia-claro)">
+    <button class="voltar" data-voltar><svg class="ic"><use href="#i-voltar"/></svg>Voltar para a área de gestão</button>
+    <div class="cabecalho">
+      <h1><span class="bolinha"><svg class="ic"><use href="#i-lista"/></svg></span>Histórico de alterações</h1>
+    </div>
+    <div class="filtros">
+      <label class="campo-inline" style="flex:1">Buscar <input id="au-busca" type="search" autocomplete="off" placeholder="Computador, venda, despesa, valor…" style="flex:1"></label>
+      <strong class="dica" id="au-resumo"></strong>
+    </div>
+    <div class="cartao cartao-tabela"><div class="rolagem rolagem-media" id="au-tabela"></div></div>
+  </section>
+
+  <!-- DRE -->
+  <section class="tela oculto protegida" id="tela-dre" style="--cor-area: var(--verde); --cor-area-clara: var(--verde-claro)">
+    <button class="voltar" data-voltar><svg class="ic"><use href="#i-voltar"/></svg>Voltar para a área de gestão</button>
+    <div class="cabecalho">
+      <h1><span class="bolinha"><svg class="ic"><use href="#i-dre"/></svg></span>DRE anual — demonstração do resultado</h1>
+      <div class="direita exportar" data-exportar="dre"></div>
+    </div>
+    <div class="filtros"><label class="campo-inline">Ano de referência <select id="dre-ano"></select></label></div>
+    <div class="kpis" id="dre-kpis"></div>
+    <div class="cartao cartao-tabela"><div class="rolagem rolagem-media" id="dre-tabela"></div></div>
+    <div class="dica" id="dre-notas" style="margin-top:8px"></div>
+    <div class="cartao grafico" id="dre-grafico" style="margin-top:12px"></div>
+  </section>
+</main>
+
+<div class="inicio-painel oculto" id="inicio-painel" role="dialog" aria-modal="true" aria-labelledby="inicio-titulo">
+  <div class="inicio-caixa">
+    <p class="inicio-marca">Vitrine Cosméticos</p>
+    <h1 id="inicio-titulo">Em qual loja você vai trabalhar?</h1>
+    <p class="dica">Escolha com atenção: tudo o que for lançado fica registrado na loja escolhida.</p>
+    <div class="inicio-cartoes" id="inicio-cartoes"></div>
+    <p class="inicio-rodape" id="inicio-rodape"></p>
+  </div>
+</div>
+
+<div class="carga-painel oculto" id="carga-painel" role="alert" aria-live="polite">
+  <div class="carga-caixa">
+    <h2>Baixando o histórico da loja <span id="carga-loja"></span>…</h2>
+    <p class="dica">Só acontece na primeira vez. Pode levar alguns minutos; não feche o programa.</p>
+    <div class="carga-barra"><i id="carga-fill"></i></div>
+    <p><strong id="carga-texto"></strong> <span class="dica" id="carga-pct"></span></p>
+  </div>
+</div>
+
+<div class="modal-fundo oculto" id="modal-fundo"><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
+
+<script src="app.js"></script>
+<script src="venda.js"></script>
+<script src="historico.js"></script>
+<script src="caixa.js"></script>
+<script src="despesas.js"></script>
+<script src="estoque.js"></script>
+<script src="pedidos.js"></script>
+<script src="gestao.js"></script>
+</body>
+</html>
