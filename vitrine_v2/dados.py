@@ -2,15 +2,15 @@
 # NOVA INTERFACE — CAMADA DE DADOS (todas as regras do sistema atual)
 # =============================================================================
 # Python puro, sem nenhuma tela. Cada função aqui reproduz uma tela do
-# nucleo_pdv.py com AS MESMAS regras de hoje (decisão do usuário em 09/10/2026:
-# "só visual, regras de hoje"). O que muda é só a aparência e a usabilidade.
+# nucleo_pdv.py com as mesmas regras do sistema anterior. O que muda é só a
+# aparência e a usabilidade.
 #
-# Únicas diferenças, exigidas pelo CLAUDE.md do projeto:
+# Únicas diferenças:
 #   * todo valor em dinheiro é lido com ler_valor_monetario ("1.500" = R$ 1.500,
-#     e não R$ 1,50 como em texto_para_valor, bug C1 do RELATORIO_REVISAO.md);
+#     e não R$ 1,50 como em texto_para_valor);
 #   * valores gravados com 2 casas; nas parcelas, a sobra dos centavos vai para
-#     a 1ª (A1);
-#   * datas digitadas são gravadas e filtradas sempre como DD/MM/AAAA (A2, A4).
+#     a 1ª;
+#   * datas digitadas são gravadas e filtradas sempre como DD/MM/AAAA.
 #
 # Formato gravado: o mesmo que o sistema atual lê (data DD/MM/AAAA, horário
 # "1:34:07 PM", pagamento "CRÉDITO 2X (1/2)"). O schema só recebe o que o

@@ -14,7 +14,6 @@
 #   ... --origem X.db                              -> migra a partir de X.db (se o oficial ainda não existe)
 #   ... --banco-novo                               -> cria banco vazio (loja nova)
 #   ... --banco X.db                               -> usa exatamente este arquivo (testes)
-#   ... --autoteste PASTA                          -> teste automático da tela e sai
 import argparse
 import functools
 import json
@@ -711,8 +710,6 @@ def main(filial, argv=None):
     ap.add_argument("--pasta-dados", help=r"padrão: C:\Vitrine\dados")
     ap.add_argument("--pasta-backup", help=r"cópia datada extra; padrão: C:\Vitrine\backup_extra")
     ap.add_argument("--banco-novo", action="store_true", help="cria banco vazio se não existir (loja nova)")
-    ap.add_argument("--autoteste", metavar="PASTA")
-    ap.add_argument("--autoteste2", metavar="PASTA", help="teste de aviso de conflito, Alt+letra e bloqueio por inatividade")
     args = ap.parse_args(argv)
 
     versao, dotnet_ok = webview2_instalado()
@@ -751,7 +748,7 @@ def main(filial, argv=None):
     filial_dados.auditar("ABRIU", f"banco {banco}")
     api = Api(filial_dados, filial, {"banco": banco, "conflitos": conflitos, "aviso": aviso,
               # testes automáticos e a bateria não passam pela tela inicial
-              "sem_inicio": bool(args.autoteste or args.autoteste2 or os.environ.get("VITRINE_SEM_INICIO"))})
+              "sem_inicio": bool(os.environ.get("VITRINE_SEM_INICIO"))})
     api._arq_ultima = os.path.join(pasta_dados, "ultima_loja.txt")
     janela_fechar_extra = []
     _backup_a_cada_hora(api, pasta_backup)
@@ -791,15 +788,6 @@ def main(filial, argv=None):
     for fechar in janela_fechar_extra:
         janela.events.closed += fechar
 
-    if args.autoteste:
-        import autoteste
-        webview.start(autoteste.rodar, (janela, args.autoteste, filial_dados.caminho_log), gui="edgechromium",
-                      private_mode=True)
-        sys.exit(autoteste.RESULTADO.get("codigo", 1))
-    if args.autoteste2:
-        import autoteste2
-        webview.start(autoteste2.rodar, (janela, args.autoteste2), gui="edgechromium", private_mode=True)
-        sys.exit(autoteste2.RESULTADO.get("codigo", 1))
     janela.events.loaded += lambda: _conferir_motor(janela)
     webview.start(gui="edgechromium", private_mode=True)
 

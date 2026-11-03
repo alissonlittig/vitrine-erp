@@ -22,7 +22,7 @@ try:
 except ImportError:  # rodando pelo Python, sem o pacote
     velopack = None
 
-FONTE_PADRAO = "https://github.com/exemplo/vitrine-releases"
+FONTE_PADRAO = None  # sem fonte configurada, o atualizador fica desativado
 CANAL_PADRAO = "oficial"
 INTERVALO_S = 3600
 ATRASO_INICIAL_S = 20
@@ -48,7 +48,7 @@ class Atualizador:
         self.um = None
         self.estado = {"ativo": False, "versao": "", "canal": "", "status": "desativado", "nova": "", "notas": "",
                        "ultima_checagem": "", "erro": ""}
-        if velopack is None:
+        if velopack is None or not self.fonte:
             return
         try:
             self.um = velopack.UpdateManager(self._origem(), self._opcoes())
